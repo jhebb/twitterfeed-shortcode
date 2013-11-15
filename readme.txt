@@ -18,9 +18,9 @@ This section describes how to install the plugin and get it working.
 e.g.
 
 1. Upload plugin to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Add [twitterfeed] shortcode anywhere along with desired parameters
-1. Style as needed. Multiple css hooks are provided
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Add [twitterfeed] shortcode anywhere along with desired parameters
+4. Style as needed. Multiple css hooks are provided
 
 
 == Frequently Asked Questions ==
