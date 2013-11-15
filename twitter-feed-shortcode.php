@@ -20,10 +20,8 @@ include_once('twitter-feed-settings.php');
  * @param $count int optional - number of tweets to display.
  * @param $exclude_replies boolean - show or hide replies.
  * @param $includ_rts boolean - show or hide retweets.
- * @param $add_links optional boolean - Add links to hashtags and names
- * @param $key int optional - your public twitter api key.
- * @param $secret int optional - your secret twitter api key.
- * Usage: [twitterfeed account="twitteraccount" count="5" exclude_replies="false" includ_rts="true" add_links=true key="your-public-key" secret="your-secret-key"]
+ *
+ * Usage: [twitterfeed account="twitteraccount" count="5" exclude_replies="false" includ_rts="true" add_links=true]
  */
 function shortcode_twitter_feed($atts) {
 
