@@ -94,10 +94,12 @@ class Wp_Twitter_Api {
 		if ( is_array( $query_args ) && !empty( $query_args ) )
 			$this->query_args = array_merge( $this->query_args, $query_args );
 		
-		$transient_name = json_decode( 'wta_' . md5( $query ) );
+		$transient_name = 'wta_' . md5( $query );
 		
-		if ( false !== ( $data = get_transient( $transient_name ) ) )
+		if ( false !== ( $data = get_transient( $transient_name ) ) ) {
+			$data = json_decode( $data );
 			return $data;
+		}
 		
 		$args = array(
 			'method'		=> 	'GET',

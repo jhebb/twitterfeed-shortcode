@@ -16,23 +16,24 @@ include_once('twitter-feed-settings.php');
  *
  * Shortcode to display tweets using twitter api 1.1
  *
- * @param $account string optional - name of twitter account.
+ * @param $account string required - name of twitter account.
  * @param $count int optional - number of tweets to display.
- * @param $exclude_replies boolean - show or hide replies.
- * @param $includ_rts boolean - show or hide retweets.
+ * @param $exclude_replies optional boolean - show or hide replies.
+ * @param $include_rts optional boolean - show or hide retweets.
+ * @param $add_links optional boolean - add markup for hastags and names.
+ * @param $cache optional boolean - length of time to chace results, in seconds .
  *
- * Usage: [twitterfeed account="twitteraccount" count="5" exclude_replies="false" includ_rts="true" add_links=true]
+ * Usage: [twitterfeed account="twitteraccount" count="5" exclude_replies="false" include_rts="true" add_links=true cache=1800]
  */
 function shortcode_twitter_feed($atts) {
 
 	extract( shortcode_atts( array(
-		'account' => '',
-        'count' => 5,
-        'exclude_replies' => false,
-        'include_rts' => true,
-        'add_links' => true,
-        'key' => '',
-        'secret' => ''
+        'account'           => '',
+        'count'             => 5,
+        'exclude_replies'   => false,
+        'include_rts'       => true,
+        'add_links'         => true,
+        'cache'             => 60 * 30
     ), $atts ) );
 
 	// Fix SSL issues for WordPress (https://plus.google.com/107110219316412982437/posts/gTdK4MrnKUa)
@@ -49,7 +50,7 @@ function shortcode_twitter_feed($atts) {
 	);
 
 
-	// Set query variables
+	// Set query & arg variables
 	$twitter_link = 'http://twitter.com/' . $account;
 
 	// Let's instantiate Wp_Twitter_Api with your credentials
@@ -62,18 +63,23 @@ function shortcode_twitter_feed($atts) {
 	// Set up query
 	$query = 'count=' .$count. '&include_entities=true&exclude_replies=' . $exclude_replies . '&include_rts=' . $include_rts . '&screen_name=' .$account;
 
+	// Add arguments
+	$args = array (
+	  'cache' => $cache
+	);
+
 
 	// Compile the results
-	$tweets = $twitter_api->query( $query );
+	$tweets = $twitter_api->query( $query, $args );
 	$result = '';
 
-	// print_r($tweets);
+	// return $tweets;
 
 	if ( !is_null($tweets) && is_array($tweets) ) {
 		$tweet_display = '';
 		foreach ( $tweets as $tweet ) {
 		    /* Human friendly times  */
-			$timerange = 60*60*24*5; // one week in seconds
+			$timerange = 60*60*24*7; // one week in seconds
 			if ( ( current_time('timestamp') - strtotime( $tweet->created_at ) ) < $timerange ) {
 				$tweet_time = 'about '.human_time_diff( strtotime( $tweet->created_at ), current_time('timestamp') ) . ' ago';
 			} else {
@@ -120,7 +126,6 @@ function shortcode_twitter_feed($atts) {
 
 		$result .= 'No tweets available!<br />';
 	}
-
 
 	// Return markup and results
 	return $result;
