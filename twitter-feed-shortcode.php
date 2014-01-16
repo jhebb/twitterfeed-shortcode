@@ -100,12 +100,17 @@ function shortcode_twitter_feed($atts) {
 			        '<span class="twitter-feed-tweet-time"><a href="https://twitter.com/%screen_name%/status/%id%" target="_blank">%created_at%</a></span>'
 			);
 
-			// Add links to hashtags and names
+			// Add links to hashtags & names & shortlinks
 		    if ($add_links == 'true') {
 			    // linkify @names
 			    $tweet->text = preg_replace('!@([a-z0-9_]{1,15})!i', '<a class="twitter-screen-name" href="https://twitter.com/\\1" target="_blank">\\0</a>', $tweet->text );
 			    // linkify #hashtags
 			    $tweet->text = preg_replace('/(?<!&)#(\w+)/i', '<a class="twitter-hashtag" href="https://twitter.com/search?q=%23\\1&amp;src=hash" target="_blank">\\0</a>', $tweet->text );
+
+			    // linkify t.co links
+				foreach ($tweet->entities->urls as $url) {
+			        $tweet->text = str_replace($url->url, '<a class="twitter-shortlink" href="' . $url->expanded_url . '" target="_blank">' . $url->url . '</a>', $tweet->text);
+			    }
 		    }
 
 		    // Compile single tweet markup

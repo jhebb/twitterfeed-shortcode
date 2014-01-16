@@ -30,8 +30,10 @@ e.g.
 
 == Changelog ==
 
+
 = 0.1.5 =
 * Move date below tweet
+* Add hyperlinks to t.co short links
 
 = 0.1 =
 * Initial version of plugin
