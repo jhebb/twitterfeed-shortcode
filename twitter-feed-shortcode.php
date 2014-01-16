@@ -110,8 +110,8 @@ function shortcode_twitter_feed($atts) {
 
 		    // Compile single tweet markup
 	    	$tweet_display .= '<div class="twitter-feed-tweet">';
-			$tweet_display .= $tweet_permalink;
 			$tweet_display .= $tweet->text;
+			$tweet_display .= $tweet_permalink;
 			$tweet_display .= '</div>';
 		}
 

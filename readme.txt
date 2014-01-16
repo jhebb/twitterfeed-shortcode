@@ -30,6 +30,9 @@ e.g.
 
 == Changelog ==
 
+= 0.1.5 =
+* Move date below tweet
+
 = 0.1 =
 * Initial version of plugin
 
