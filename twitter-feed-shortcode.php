@@ -49,6 +49,9 @@ function shortcode_twitter_feed($atts) {
 	  'consumer_secret' => $twittersettings['consumer_secret']
 	);
 
+	if ( !$account ) {
+		return 'Please check your account!<br />';
+	}
 
 	// Set query & arg variables
 	$twitter_link = 'http://twitter.com/' . $account;
