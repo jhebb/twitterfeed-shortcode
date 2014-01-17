@@ -1,4 +1,8 @@
 <?php
+/**
+ * Twitter Feed Shortcode - Settings
+ */
+
 class TwitterFeedSettings
 {
     /**

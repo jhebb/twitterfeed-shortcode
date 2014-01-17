@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Twitter Feed Shortcode
  * Description: A simple twitter feed shortcode using Twitter API 1.1.
- * Version: 0.1
+ * Version: 0.1.5
  * Author: Justin Hebb
  * Author URI: http://jukah.com
  */
