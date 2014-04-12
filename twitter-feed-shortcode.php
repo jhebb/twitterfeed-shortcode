@@ -114,7 +114,11 @@ function shortcode_twitter_feed($atts) {
 				foreach ($tweet->entities->urls as $url) {
 			        $tweet->text = str_replace($url->url, '<a class="twitter-shortlink" href="' . $url->expanded_url . '" target="_blank">' . $url->url . '</a>', $tweet->text);
 			    }
-		    }
+
+			    // linkify t.co links for media
+				foreach ($tweet->entities->media as $media) {
+			        $tweet->text = str_replace($media->url, '<a class="twitter-shortlink" href="' . $media->expanded_url . '" target="_blank">' . $media->url . '</a>', $tweet->text);
+			    }		    }
 
 		    // Compile single tweet markup
 	    	$tweet_display .= '<div class="twitter-feed-tweet">';
