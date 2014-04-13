@@ -115,10 +115,13 @@ function shortcode_twitter_feed($atts) {
 			        $tweet->text = str_replace($url->url, '<a class="twitter-shortlink" href="' . $url->expanded_url . '" target="_blank">' . $url->url . '</a>', $tweet->text);
 			    }
 
-			    // linkify t.co links for media
-				foreach ($tweet->entities->media as $media) {
-			        $tweet->text = str_replace($media->url, '<a class="twitter-shortlink" href="' . $media->expanded_url . '" target="_blank">' . $media->url . '</a>', $tweet->text);
-			    }		    }
+			    // linkify t.co links for media - check for the media entity first as it's not always set
+			    if ( isset($tweet->entities->media)) {
+					foreach ($tweet->entities->media as $themedia) {
+				        $tweet->text = str_replace($themedia->url, '<a class="twitter-shortlink" href="' . $themedia->expanded_url . '" target="_blank">' . $themedia->url . '</a>', $tweet->text);
+				    }
+			    }
+			}
 
 		    // Compile single tweet markup
 	    	$tweet_display .= '<div class="twitter-feed-tweet">';
