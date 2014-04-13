@@ -1,7 +1,7 @@
 === Twitter Feed Shortcode ===
 Contributors: jmh
 Tags: twitter, shortcode
-Requires at least: 3.8.1
+Requires at least: 3.6.1
 Tested up to: 3.8.1
 
 Simple twitter feed shortcode using Twitter API 1.1
