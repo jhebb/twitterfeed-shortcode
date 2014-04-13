@@ -1,8 +1,8 @@
 === Twitter Feed Shortcode ===
 Contributors: jmh
 Tags: twitter, shortcode
-Requires at least: 3.6.1
-Tested up to: 3.6.1
+Requires at least: 3.8.1
+Tested up to: 3.8.1
 
 Simple twitter feed shortcode using Twitter API 1.1
 
@@ -30,6 +30,9 @@ e.g.
 
 == Changelog ==
 
+
+= 0.1.6 =
+* Add hyperlinks to t.co media short links
 
 = 0.1.5 =
 * Move date below tweet
