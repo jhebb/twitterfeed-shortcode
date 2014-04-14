@@ -40,15 +40,16 @@ function shortcode_twitter_feed($atts) {
 	add_filter( 'https_ssl_verify', '__return_false' );
 	add_filter( 'https_local_ssl_verify', '__return_false' );
 
-
 	// Set access keys
 	$twittersettings = get_option('twitterfeed_settings');
 
+	// Check credentials
 	$credentials = array(
 	  'consumer_key' => $twittersettings['consumer_key'],
 	  'consumer_secret' => $twittersettings['consumer_secret']
 	);
 
+	// Check twitter account
 	if ( !$account ) {
 		return 'Please check your account!<br />';
 	}
@@ -71,13 +72,11 @@ function shortcode_twitter_feed($atts) {
 	  'cache' => $cache
 	);
 
+	// Get the results
+	$tweets = $twitter_api->query( $query, $args );
 
 	// Compile the results
-	$tweets = $twitter_api->query( $query, $args );
 	$result = '';
-
-	// return $tweets;
-
 	if ( !is_null($tweets) && is_array($tweets) ) {
 		$tweet_display = '';
 		foreach ( $tweets as $tweet ) {
@@ -88,6 +87,7 @@ function shortcode_twitter_feed($atts) {
 			} else {
 				$tweet_time = date( "F jS, g:i a", strtotime( $tweet->created_at ) );
 			}
+
 			// Tweet permalink
 		    $tweet_permalink = str_replace(
 				array(
@@ -133,7 +133,6 @@ function shortcode_twitter_feed($atts) {
 
 		// Compile feed markup
 		$result .= '<div class="twitter-feed-wrap">';
-		//$result .= '<a href="'. $twitter_link . '"><div class="twitter-feed-title">twitter</div></a>';
 		$result .= '<div class="twitter-feed">' .$tweet_display. '</div>';
 		$result .= '</div>';
 
