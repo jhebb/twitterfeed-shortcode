@@ -121,9 +121,10 @@ function twitter_feed_markup($tweets, $add_links = true) {
 			// Add links to hashtags & names & shortlinks
 		    if ($add_links == 'true') {
 			    // linkify @names
-			    $tweet->text = preg_replace('!@([a-z0-9_]{1,15})!i', '<a class="twitter-screen-name" href="https://twitter.com/\\1" target="_blank">\\0</a>', $tweet->text );
+			    $tweet->text = preg_replace('!@([a-z0-9_]{1,15})!i', '<a class="twitter-screen-name" href="https://twitter.com/$1" target="_blank">$0</a>', $tweet->text );
+
 			    // linkify #hashtags
-			    $tweet->text = preg_replace('/(?<!&)#(\w+)/i', '<a class="twitter-hashtag" href="https://twitter.com/search?q=%23\\1&amp;src=hash" target="_blank">\\0</a>', $tweet->text );
+			    $tweet->text = preg_replace('/(?<!&)#(\w+)/i', '<a class="twitter-hashtag" href="https://twitter.com/search?q=%23$1&amp;src=hash" target="_blank">$0</a>', $tweet->text );
 
 			    // linkify t.co links
 				foreach ($tweet->entities->urls as $url) {
