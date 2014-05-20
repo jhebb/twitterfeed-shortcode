@@ -74,12 +74,28 @@ function shortcode_twitter_feed($atts) {
 	// Get the results
 	$tweets = $twitter_api->query( $query, $args );
 
-	// Compile the results
-	$result = '';
+	// Return the feed markup
+	return twitter_feed_markup($tweets, $add_links);
+}
+add_shortcode("twitterfeed", "shortcode_twitter_feed");
+
+
+
+/**
+ * Generate Tweets markup
+ *
+ * Generates and assembles markup for twitter feed.
+ *
+ * @param $tweets array required - an array containing the tweets.
+ * @param $add_links boolean optional - add markup for hastags and names.
+ *
+ */
+function twitter_feed_markup($tweets, $add_links = true) {
+
 	if ( !is_null($tweets) && is_array($tweets) ) {
 		$tweet_display = '';
 		foreach ( $tweets as $tweet ) {
-		    /* Human friendly times  */
+		    // Human friendly times
 			$timerange = 60*60*24*7; // one week in seconds
 			if ( ( current_time('timestamp') - strtotime( $tweet->created_at ) ) < $timerange ) {
 				$tweet_time = 'about '.human_time_diff( strtotime( $tweet->created_at ), current_time('timestamp') ) . ' ago';
@@ -131,16 +147,15 @@ function shortcode_twitter_feed($atts) {
 
 
 		// Compile feed markup
-		$result .= '<div class="twitter-feed-wrap">';
+		$result = '<div class="twitter-feed-wrap">';
 		$result .= '<div class="twitter-feed">' .$tweet_display. '</div>';
 		$result .= '</div>';
 
 	} else {
 
-		$result .= 'No tweets available!<br />';
+		$result = 'No tweets available!<br />';
 	}
 
 	// Return markup and results
 	return $result;
 }
-add_shortcode("twitterfeed", "shortcode_twitter_feed");
