@@ -18,10 +18,9 @@ include_once('twitter-feed-settings.php');
  *
  * @param $account string required - name of twitter account.
  * @param $count int optional - number of tweets to display.
- * @param $exclude_replies optional boolean - show or hide replies.
- * @param $include_rts optional boolean - show or hide retweets.
- * @param $add_links optional boolean - add markup for hastags and names.
- * @param $cache optional boolean - length of time to chace results, in seconds .
+ * @param $exclude_replies boolean optional - show or hide retweets.
+ * @param $add_links boolean optional - add markup for hastags and names.
+ * @param $cache boolean optional - length of time to cache results, in seconds.
  *
  * Usage: [twitterfeed account="twitteraccount" count="5" exclude_replies="false" include_rts="true" add_links=true cache=1800]
  */
