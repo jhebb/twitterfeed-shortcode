@@ -31,7 +31,7 @@ e.g.
 == Changelog ==
 
 
-= 0.1.6 =
+= 0.1.7 =
 * Clean up typos and excess lines
 * Convert markup generation to it's own function
 
