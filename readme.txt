@@ -32,6 +32,10 @@ e.g.
 
 
 = 0.1.6 =
+* Clean up typos and excess lines
+* Convert markup generation to it's own function
+
+= 0.1.6 =
 * Add hyperlinks to t.co media short links
 
 = 0.1.5 =
