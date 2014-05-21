@@ -141,7 +141,7 @@ function twitter_feed_markup($tweets, $add_links = true) {
 
 		    // Compile single tweet markup
 	    	$tweet_display .= '<div class="twitter-feed-tweet">';
-			$tweet_display .= $tweet->text;
+			$tweet_display .= $tweet->text . ' '; // extra space between text and date
 			$tweet_display .= $tweet_permalink;
 			$tweet_display .= '</div>';
 		}
